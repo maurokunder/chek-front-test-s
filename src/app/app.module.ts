@@ -13,6 +13,7 @@ import { NewRecipientComponent } from './components/new-recipient/new-recipient.
 import { TransferComponent } from './components/transfer/transfer.component';
 import { TransferHistoryComponent } from './components/transfer-history/transfer-history.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FlexModule,
     MatToolbarModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

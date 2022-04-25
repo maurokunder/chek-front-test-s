@@ -7,16 +7,16 @@
                 <span class="feature-text" *ngIf="!deviceXs">- Nueva Transferencia</span>
             </button>
             <div *ngIf="!deviceXs">
-                <button mat-flat-button color="primary">Nuevo Destinatario</button>
-                <button mat-flat-button color="primary">Transferir</button>
-                <button mat-flat-button color="primary">Historial</button>
+                <button mat-flat-button color="primary" [routerLink]="['nuevo-destinatario']" routerLinkActive="router-link-active">Nuevo Destinatario</button>
+                <button mat-flat-button color="primary" [routerLink]="['transferir']">Transferir</button>
+                <button mat-flat-button color="primary" [routerLink]="['historial']">Historial</button>
             </div>
         </div>
     </mat-toolbar-row>
 
     <mat-toolbar-row *ngIf="deviceXs" fxLayoutAlign="space-between end">
-            <button mat-button color="primary">Nuevo Destinatario</button>
-            <button mat-button color="primary">Transferir</button>
-            <button mat-button color="primary">Historial</button>
+        <button mat-button color="primary" [routerLink]="['nuevo-destinatario']" routerLinkActive="router-link-active">Nuevo Destinatario</button>
+        <button mat-button color="primary" [routerLink]="['transferir']">Transferir</button>
+        <button mat-button color="primary" [routerLink]="['historial']">Historial</button>
     </mat-toolbar-row>
 </mat-toolbar>
