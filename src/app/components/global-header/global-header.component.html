@@ -1,1 +1,22 @@
-<p>global-header works!</p>
+<mat-toolbar class="toolbar_color">
+    <mat-toolbar-row fxLayoutAlign="space-around center">
+        <div fxLayoutAlign="row">
+            <button mat-button color="primary">
+                <mat-icon >account_balance</mat-icon>
+                <span class="logo">Mi Banco</span>
+                <span class="feature-text" *ngIf="!deviceXs">- Nueva Transferencia</span>
+            </button>
+            <div *ngIf="!deviceXs">
+                <button mat-flat-button color="primary" [routerLink]="['nuevo-destinatario']" routerLinkActive="router-link-active">Nuevo Destinatario</button>
+                <button mat-flat-button color="primary" [routerLink]="['transferir']">Transferir</button>
+                <button mat-flat-button color="primary" [routerLink]="['historial']">Historial</button>
+            </div>
+        </div>
+    </mat-toolbar-row>
+
+    <mat-toolbar-row *ngIf="deviceXs" fxLayoutAlign="space-between end">
+        <button mat-button color="primary" [routerLink]="['nuevo-destinatario']" routerLinkActive="router-link-active">Nuevo Destinatario</button>
+        <button mat-button color="primary" [routerLink]="['transferir']">Transferir</button>
+        <button mat-button color="primary" [routerLink]="['historial']">Historial</button>
+    </mat-toolbar-row>
+</mat-toolbar>

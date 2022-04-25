@@ -1,15 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-global-header',
   templateUrl: './global-header.component.html',
   styleUrls: ['./global-header.component.scss']
 })
-export class GlobalHeaderComponent implements OnInit {
+export class GlobalHeaderComponent {
+  @Input() deviceXs: boolean;
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }
