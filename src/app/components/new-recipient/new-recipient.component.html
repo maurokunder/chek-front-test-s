@@ -1,1 +1,57 @@
-<p>new-recipient works!</p>
+<app-title-component [enterTitle]="enterTitle"></app-title-component>
+<div class="container">
+    <form [formGroup]="newRecipientForm" class="form-container">
+        <mat-card class="size-card">
+            <div class="row">
+                <mat-form-field class="{{returnClassSize}}" appearance="fill">
+                    <mat-label>Rut</mat-label>
+                    <input formControlName="rut" matInput placeholder="Ej: 16.806.320-2">
+                </mat-form-field>
+                <mat-form-field class="{{returnClassSize}}" appearance="fill">
+                    <mat-label>Nombre</mat-label>
+                    <input formControlName="fullName" matInput placeholder="Ej: Juan Andres Gonzalez Gonzalez">
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="{{returnClassSize}}" appearance="fill">
+                    <mat-label>Correo</mat-label>
+                    <input formControlName="email" matInput placeholder="Ej: ejemplo@gmail.com">
+                </mat-form-field>
+                <mat-form-field class="{{returnClassSize}}" appearance="fill">
+                    <mat-label>Teléfono</mat-label>
+                    <input formControlName="phone" matInput placeholder="Ej:56934432579">
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="{{returnClassSize}}" appearance="fill">
+                    <mat-label>Banco</mat-label>
+                    <mat-select formControlName="bankId">
+                       <mat-option *ngFor="let bank of obtainBanks" [value]="bank.id">
+                        {{bank.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="{{returnClassSize}}" appearance="fill">
+                    <mat-label>Tipo de Cuenta</mat-label>
+                    <mat-select formControlName="typeAccount">
+                       <mat-option  *ngFor="let type of typeAccounts" [value]="type.value">
+                        {{type.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <mat-form-field class="{{returnClassSize}}" appearance="fill">
+                    <mat-label>N° De Cuenta</mat-label>
+                    <input formControlName="accountNumber" matInput placeholder="00-25-20923-03">
+                </mat-form-field>
+            </div>
+            <div class="row">
+                <button class="{{returnClassSize}}" (click)="saveForm()" mat-flat-button color="primary">Crear</button>
+            </div>
+        </mat-card>
+    </form>
+</div>
