@@ -23,6 +23,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { TitleComponentComponent } from './components/title-component/title-component.component';
 import { NewRecipientComponentModule } from './components/new-recipient/new-recipient.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AutocompleteComponentComponent } from './autocomplete-component/autocomplete-component.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { HttpClientModule } from '@angular/common/http';
     NewRecipientComponent,
     TransferComponent,
     TransferHistoryComponent,
-    TitleComponentComponent
+    TitleComponentComponent,
+    AutocompleteComponentComponent
   ],
   imports: [
     BrowserModule,

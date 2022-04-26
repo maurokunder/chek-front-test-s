@@ -1,1 +1,43 @@
 <app-title-component [enterTitle]="enterTitle"></app-title-component>
+<div class="container">
+    <form [formGroup]="newRecipientForm" class="form-container">
+        <mat-card class="size-card">
+            <div class="row">
+                <app-autocomplete-component></app-autocomplete-component>
+            </div>
+
+            <div class="row">
+                <div class="size_title">
+                    <label class="separate"><b>Detalle Destinatario</b></label>
+                </div>
+                <div class="separate">
+                    <label><b>Nombre: </b></label>
+                    <label> {{newRecipient.fullName}}</label>
+                </div>
+                <div class="separate">
+                    <label><b>Correo: </b></label>
+                    <label> {{newRecipient.email}}</label>
+                </div>
+                <div class="separate">
+                    <label><b>Banco:</b></label>
+                    <label> {{newRecipient.bankId}}</label>
+                </div>
+                <div class="separate">
+                    <label><b>Tipo de Cuenta:</b></label>
+                    <label> {{newRecipient.typeAccount}}</label>
+                </div>
+            </div>
+
+            <div class="row">
+                <mat-form-field  appearance="fill">
+                    <mat-label>Monto</mat-label>
+                    <input formControlName="amount" matInput placeholder="Ej: 1000000" value=0>
+                </mat-form-field>
+            </div>
+
+            <div class="row">
+                <button class="desktot-width" (click)="saveForm()" mat-flat-button color="primary">Transferir</button>
+            </div>
+        </mat-card>
+    </form>
+</div>
