@@ -5,6 +5,12 @@ import { FlexModule } from '@angular/flex-layout';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -14,6 +20,9 @@ import { TransferComponent } from './components/transfer/transfer.component';
 import { TransferHistoryComponent } from './components/transfer-history/transfer-history.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
+import { TitleComponentComponent } from './components/title-component/title-component.component';
+import { NewRecipientComponentModule } from './components/new-recipient/new-recipient.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -21,7 +30,8 @@ import { AppRoutingModule } from './app-routing.module';
     GlobalHeaderComponent,
     NewRecipientComponent,
     TransferComponent,
-    TransferHistoryComponent
+    TransferHistoryComponent,
+    TitleComponentComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +40,15 @@ import { AppRoutingModule } from './app-routing.module';
     MatToolbarModule,
     MatButtonModule,
     MatIconModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NewRecipientComponentModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
