@@ -39,7 +39,7 @@ export class NewRecipientComponent implements OnInit {
     this.mediaSub = this.mediaObserver.media$.subscribe((result: MediaChange) => {
       // console.log(result.mqAlias);
       this.deviceXs = result.mqAlias === 'xs' ? true : false;
-      this.returnClassSize = this.deviceXs ? 'mobile-width' : 'example-full-width';
+      this.returnClassSize = this.deviceXs ? 'mobile-width' : 'desktot-width';
       console.log(this.returnClassSize);
     });
     this.bankService.getParams().subscribe(
@@ -49,9 +49,9 @@ export class NewRecipientComponent implements OnInit {
     );
 
     this.typeAccounts = [
-      { value: 'cuenta-0', viewValue: 'Cuenta Corriente' },
-      { value: 'cuenta-1', viewValue: 'Cuenta Vista' },
-      { value: 'cuenta-2', viewValue: 'Cuenta Ahorro' },
+      { value: 'account-0', viewValue: 'Cuenta Corriente' },
+      { value: 'account-1', viewValue: 'Cuenta Vista' },
+      { value: 'account-2', viewValue: 'Cuenta Ahorro' },
     ];
   }
 
