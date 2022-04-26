@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transfer-history.component.scss']
 })
 export class TransferHistoryComponent implements OnInit {
-  public enterTitle: string = 'Historial de Transferencia';
+  public enterTitle = 'Historial de Transferencia';
 
   constructor() { }
 

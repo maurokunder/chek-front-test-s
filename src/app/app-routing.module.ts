@@ -8,7 +8,7 @@ const APP_ROUTES: Routes = [
   { path: 'nuevo-destinatario', component: NewRecipientComponent },
   { path: 'transferir', component: TransferComponent },
   { path: 'historial', component: TransferHistoryComponent },
-  { path: '**', pathMatch:'full', redirectTo:'nuevo-destinatario'}
+  { path: '**', pathMatch: 'full', redirectTo: 'nuevo-destinatario'}
 ];
 
 @NgModule({

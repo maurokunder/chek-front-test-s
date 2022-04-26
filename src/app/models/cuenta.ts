@@ -4,6 +4,6 @@ export interface TypeAccount {
 }
 
 export interface Bank {
-    name: string,
-    id: string
+    name: string;
+    id: string;
 }

@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./transfer.component.scss']
 })
 export class TransferComponent implements OnInit {
-  public enterTitle: string = 'Transferir';
+  public enterTitle = 'Transferir';
 
   constructor() { }
 

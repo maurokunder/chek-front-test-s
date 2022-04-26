@@ -11,10 +11,9 @@ import { BankService } from 'src/app/services/bank.service';
   styleUrls: ['./new-recipient.component.scss']
 })
 export class NewRecipientComponent implements OnInit {
-  
 
   public newRecipientForm: FormGroup;
-  public enterTitle: string = 'Nuevo Destinatario'; 
+  public enterTitle = 'Nuevo Destinatario';
   public returnClassSize: string;
   public typeAccounts: TypeAccount[] = [];
   public obtainBanks: Bank[] = [];
@@ -28,28 +27,27 @@ export class NewRecipientComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    
     this.newRecipientForm = this.formBuilder.group({
-      rut:['',[Validators.required]],
-      fullName:['',[Validators.required]],
-      email:['', [Validators.required, Validators.email]],
-      phone:['', [Validators.required]],
-      bankId:['', [Validators.required]],
-      typeAccount:['', [Validators.required]],
-      accountNumber:['', [Validators.required]],
+      rut: ['', [Validators.required]],
+      fullName: ['', [Validators.required]],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required]],
+      bankId: ['', [Validators.required]],
+      typeAccount: ['', [Validators.required]],
+      accountNumber: ['', [Validators.required]],
     });
     this.mediaSub = this.mediaObserver.media$.subscribe((result: MediaChange) => {
       // console.log(result.mqAlias);
       this.deviceXs = result.mqAlias === 'xs' ? true : false;
       this.returnClassSize = this.deviceXs ? 'mobile-width' : 'example-full-width';
       console.log(this.returnClassSize);
-    }); 
+    });
     this.bankService.getParams().subscribe(
       (result) => {
         this.obtainBanks = result.banks;
       }
     );
-      
+
     this.typeAccounts = [
       { value: 'cuenta-0', viewValue: 'Cuenta Corriente' },
       { value: 'cuenta-1', viewValue: 'Cuenta Vista' },
@@ -57,7 +55,7 @@ export class NewRecipientComponent implements OnInit {
     ];
   }
 
-  public saveForm(){
+  public saveForm() {
     console.log('Form data is ', this.newRecipientForm.value);
   }
 
