@@ -12,6 +12,7 @@ import { MatInputModule } from '@angular/material/input';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
+import { Ng2Rut } from 'ng2-rut';
 
 
 import { AppComponent } from './app.component';
@@ -54,7 +55,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     NewRecipientComponentModule,
     HttpClientModule,
     MatTableModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    Ng2Rut
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -5,6 +5,7 @@ import { MediaObserver, MediaChange} from '@angular/flex-layout';
 import { Bank, TypeAccount } from 'src/app/models/cuenta';
 import { BankService } from 'src/app/services/bank.service';
 import { RecipientService } from 'src/app/services/recipient.service';
+import { RutValidator } from 'ng2-rut';
 
 @Component({
   selector: 'app-new-recipient',
@@ -26,11 +27,12 @@ export class NewRecipientComponent implements OnInit {
     public mediaObserver: MediaObserver,
     private bankService: BankService,
     private recipientService: RecipientService,
+    private rutValidator: RutValidator
   ) { }
 
   public ngOnInit(): void {
     this.newRecipientForm = this.formBuilder.group({
-      rut: ['', [Validators.required]],
+      rut: ['', [Validators.required, this.rutValidator]],
       fullName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
       phone: ['', [Validators.required]],
@@ -58,11 +60,13 @@ export class NewRecipientComponent implements OnInit {
   }
 
   public saveForm() {
-    console.log('Form data is ', this.newRecipientForm.value);
     const returnValue = this.findTypeAccount(this.newRecipientForm.value);
     this.newRecipientForm.value['typeAccount'] = returnValue;
-    this.recipientService.addNewRecipient(this.newRecipientForm.value).subscribe();
-    this.newRecipientForm.reset();
+    if (this.newRecipientForm.valid) {
+      console.log('Form data is ', this.newRecipientForm.value);
+      this.recipientService.addNewRecipient(this.newRecipientForm.value).subscribe();
+      this.newRecipientForm.reset();
+    }
   }
 
   public findTypeAccount (value: any): any {

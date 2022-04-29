@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Recipient } from 'src/app/models/cuenta';
 import { RecipientService } from 'src/app/services/recipient.service';
+import { TransferServiceService } from 'src/app/services/transfer-service.service';
 
 @Component({
   selector: 'app-transfer',
@@ -19,6 +20,7 @@ export class TransferComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private recipientService: RecipientService,
+    private trasnferService: TransferServiceService,
   ) { }
 
   ngOnInit(): void {
@@ -34,7 +36,7 @@ export class TransferComponent implements OnInit {
       this.newRecipient = $even;
       this.booleanEmit = true;
       this.newRecipientForm = this.formBuilder.group({
-          rut: this.newRecipient.rut,
+          rut: [this.newRecipient.rut],
           fullName: this.newRecipient.fullName,
           email: this.newRecipient.email,
           phone: this.newRecipient.phone,
@@ -46,10 +48,8 @@ export class TransferComponent implements OnInit {
       }
     }
 
-
-
   public saveForm() {
-    console.log('Form data is ', this.newRecipientForm.value);
+    this.trasnferService.addNewtransfer(this.newRecipientForm.value).subscribe();
     this.newRecipientForm.reset();
   }
 
