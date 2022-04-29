@@ -9,7 +9,7 @@ export class BankService {
     ) { }
 
     public getParams(): Observable<any> {
-    return this.http.get(
-        `https://bast.dev/api/banks.php`, {});
+        return this.http.get(
+            `https://bast.dev/api/banks.php`, {});
     }
 }

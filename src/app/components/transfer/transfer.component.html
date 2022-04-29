@@ -3,10 +3,12 @@
     <form [formGroup]="newRecipientForm" class="form-container">
         <mat-card class="size-card">
             <div class="row">
-                <app-autocomplete-component></app-autocomplete-component>
+                <app-autocomplete-component [dataSource]="arrayRecipient"
+                (newItemEvent)="getObjetFromAutocomplete($event)"
+                ></app-autocomplete-component>
             </div>
 
-            <div class="row">
+            <div class="row" *ngIf="booleanEmit">
                 <div class="size_title">
                     <label class="separate"><b>Detalle Destinatario</b></label>
                 </div>
@@ -26,17 +28,17 @@
                     <label><b>Tipo de Cuenta:</b></label>
                     <label> {{ newRecipient.typeAccount }}</label>
                 </div>
+                <div class="row">
+                    <mat-form-field  appearance="fill">
+                        <mat-label>Monto</mat-label>
+                        <input type="number" formControlName="amount" matInput placeholder="Ej: 1000000" min="1" required>
+                    </mat-form-field>
+                </div>
             </div>
 
-            <div class="row">
-                <mat-form-field  appearance="fill">
-                    <mat-label>Monto</mat-label>
-                    <input type="number" formControlName="amount" matInput placeholder="Ej: 1000000" value=0>
-                </mat-form-field>
-            </div>
 
-            <div class="row">
-                <button class="desktot-width" (click)="saveForm()" mat-flat-button color="primary">Transferir</button>
+            <div class="button_row">
+                <button type="submit" class="desktot-width" (click)="saveForm()" mat-flat-button color="primary">Transferir</button>
             </div>
         </mat-card>
     </form>
