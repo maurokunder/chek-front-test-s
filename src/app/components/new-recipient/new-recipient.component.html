@@ -28,7 +28,7 @@
                 <mat-form-field class="{{returnClassSize}}" appearance="fill">
                     <mat-label>Banco</mat-label>
                     <mat-select formControlName="bankId">
-                       <mat-option *ngFor="let bank of obtainBanks" [value]="bank.id">
+                       <mat-option *ngFor="let bank of obtainBanks" [value]="bank.name">
                         {{bank.name}}
                         </mat-option>
                     </mat-select>

@@ -24,7 +24,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { TitleComponentComponent } from './components/title-component/title-component.component';
 import { NewRecipientComponentModule } from './components/new-recipient/new-recipient.module';
 import { HttpClientModule } from '@angular/common/http';
-import { AutocompleteComponentComponent } from './autocomplete-component/autocomplete-component.component';
+import { AutocompleteComponentComponent } from './components/autocomplete-component/autocomplete-component.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { AutocompleteComponentComponent } from './autocomplete-component/autocom
     ReactiveFormsModule,
     NewRecipientComponentModule,
     HttpClientModule,
-    MatTableModule
+    MatTableModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

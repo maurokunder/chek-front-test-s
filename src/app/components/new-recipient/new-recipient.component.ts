@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { MediaObserver, MediaChange} from '@angular/flex-layout';
 import { Bank, TypeAccount } from 'src/app/models/cuenta';
 import { BankService } from 'src/app/services/bank.service';
+import { RecipientService } from 'src/app/services/recipient.service';
 
 @Component({
   selector: 'app-new-recipient',
@@ -23,7 +24,8 @@ export class NewRecipientComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     public mediaObserver: MediaObserver,
-    private bankService: BankService
+    private bankService: BankService,
+    private recipientService: RecipientService,
   ) { }
 
   public ngOnInit(): void {
@@ -57,6 +59,13 @@ export class NewRecipientComponent implements OnInit {
 
   public saveForm() {
     console.log('Form data is ', this.newRecipientForm.value);
+    const returnValue = this.findTypeAccount(this.newRecipientForm.value);
+    this.newRecipientForm.value['typeAccount'] = returnValue;
+    this.recipientService.addNewRecipient(this.newRecipientForm.value).subscribe();
   }
 
+  public findTypeAccount (value: any): any {
+    const account = this.typeAccounts.find((r) => r.value === value['typeAccount']);
+    return account.viewValue;
+  }
 }

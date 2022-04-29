@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Bank, Recipient } from 'src/app/models/cuenta';
-import { BankService } from 'src/app/services/bank.service';
+import { Recipient } from 'src/app/models/cuenta';
+import { RecipientService } from 'src/app/services/recipient.service';
 
 @Component({
   selector: 'app-transfer',
@@ -12,53 +12,41 @@ export class TransferComponent implements OnInit {
   public enterTitle = 'Transferir';
   public newRecipientForm: FormGroup;
   public newRecipient: Recipient;
-  typeAccounts = [
-    { value: 'account-0', viewValue: 'Cuenta Corriente' },
-    { value: 'account-1', viewValue: 'Cuenta Vista' },
-    { value: 'account-2', viewValue: 'Cuenta Ahorro' },
-  ];
+  public arrayRecipient: any[] = [];
+  public booleanEmit: boolean = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
-    private bankService: BankService,
+    private recipientService: RecipientService,
   ) { }
 
-  async ngOnInit(): Promise<void> {
-  this.obtainBank('0000003').then((r) => {
-      this.newRecipient = {
-        rut: '16.806.320-2',
-        fullName: 'Mauricio Oyarzun',
-        email: 'moyarzun@gmail.com',
-        phone: '934432579',
-        bankId:r,
-        typeAccount: this.obtainTypeAccount('account-1'),
-        accountNumber: '123123123'
+  ngOnInit(): void {
+    this.recipientService.allRecipients().subscribe(
+      (res:Recipient[]) => {
+        this.arrayRecipient = Object.values(res);
+      });
+    this.newRecipientForm = this.formBuilder.group({});
+  }
+
+  public getObjetFromAutocomplete($even) {
+    if ($even) {
+      this.newRecipient = $even;
+      this.booleanEmit = true;
+      this.newRecipientForm = this.formBuilder.group({
+          rut: this.newRecipient.rut,
+          fullName: this.newRecipient.fullName,
+          email: this.newRecipient.email,
+          phone: this.newRecipient.phone,
+          bankId: this.newRecipient.bankId,
+          typeAccount: this.newRecipient.typeAccount,
+          accountNumber: this.newRecipient.accountNumber,
+          amount: ['', Validators.required]
+        });
       }
-      console.log(this.newRecipient);
-    });
+    }
 
-    this.newRecipientForm = this.formBuilder.group({
-      rut: '16.806.320-2',
-      fullName: 'Mauricio Oyarzun',
-      email: 'moyarzun@gmail.com',
-      phone: '934432579',
-      bankId: '00001',
-      typeAccount: this.obtainTypeAccount('account-1'),
-      accountNumber: '123123123',
-      amount: [, Validators.required]
-    });
-  }
 
-  public async obtainBank(bankId: string): Promise<string> {
-    let banks = await this.bankService.getParams().toPromise().then(r => r);
-    let bank = banks.banks.find((res)=> res.id === bankId )
-    return bank.name;
-  }
-
-  public obtainTypeAccount(id: string): string {
-    const value = this.typeAccounts.find((ret) => ret.value === id);
-    return value.viewValue;
-  }
 
   public saveForm() {
     console.log('Form data is ', this.newRecipientForm.value);

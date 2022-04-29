@@ -16,5 +16,16 @@ export interface Recipient {
     bankId: string;
     typeAccount: string;
     accountNumber: string;
+}
+
+export interface Transfer {
+    rut: string;
+    fullName: string;
+    email: string;
+    phone: string;
+    bankId: string;
+    typeAccount: string;
+    accountNumber: string;
     amount?: number;
 }
+
