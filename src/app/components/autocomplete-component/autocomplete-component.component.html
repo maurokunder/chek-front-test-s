@@ -1,19 +1,15 @@
 <form class="example-form">
     <mat-form-field class="example-full-width" appearance="fill">
     <mat-label>Buscar Destinatario</mat-label>
-    <input type="text"
-            placeholder="Buscar"
-            aria-label="Destinatario"
-            matInput
-            
-            [formControl]="myControl"
-            [matAutocomplete]="auto">
-        <mat-autocomplete #auto="matAutocomplete"   >
-        <mat-option *ngFor="let option of dataSource" 
-        (onSelectionChange)="objectAfterSelection(option)"
-        [value]="option.fullName">
-            {{option.fullName}}
+    <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+    <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+        <mat-option *ngFor="let option of filteredOptions | async" 
+        (onSelectionChange)="objectAfterSelection(option)" 
+        [value]="option">
+        {{option.fullName}}
         </mat-option>
         </mat-autocomplete>
     </mat-form-field>
 </form>
+
+

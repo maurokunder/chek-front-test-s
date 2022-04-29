@@ -50,6 +50,7 @@ export class TransferComponent implements OnInit {
 
   public saveForm() {
     console.log('Form data is ', this.newRecipientForm.value);
+    this.newRecipientForm.reset();
   }
 
 }

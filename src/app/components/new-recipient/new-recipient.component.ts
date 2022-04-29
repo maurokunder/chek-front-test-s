@@ -62,6 +62,7 @@ export class NewRecipientComponent implements OnInit {
     const returnValue = this.findTypeAccount(this.newRecipientForm.value);
     this.newRecipientForm.value['typeAccount'] = returnValue;
     this.recipientService.addNewRecipient(this.newRecipientForm.value).subscribe();
+    this.newRecipientForm.reset();
   }
 
   public findTypeAccount (value: any): any {
