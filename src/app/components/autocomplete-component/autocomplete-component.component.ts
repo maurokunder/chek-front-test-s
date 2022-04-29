@@ -21,7 +21,6 @@ export class AutocompleteComponentComponent implements OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     this.options = this.dataSource;
-    console.log(this.options);
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => (typeof value === 'string' ? value : value.fullName)),
@@ -39,10 +38,6 @@ export class AutocompleteComponentComponent implements OnChanges {
     return this.options.filter(option => option.fullName.toLowerCase().includes(filterValue));
   }
 
-
-
-  
-  
   public objectAfterSelection(option: any){
     this.newItemEvent.emit(option);
   }
