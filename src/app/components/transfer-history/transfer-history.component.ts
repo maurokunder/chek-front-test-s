@@ -10,7 +10,6 @@ export class TransferHistoryComponent implements OnInit {
   public enterTitle = 'Historial de Transferencia';
   public arrayService = [];
   displayedColumns: string[] = ['Nombre Destinatario', 'Rut', 'Banco', 'Tipo de Cuenta', 'Monto'];
-  //dataSource = ELEMENT_DATA;
 
   constructor(
     private transferService: TransferServiceService,
@@ -18,14 +17,11 @@ export class TransferHistoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.transferService.historyTransfer().subscribe(
-      (r: any[]) => {
-        this.arrayService = r.sort((a,b) => { 
-          console.log(a.createdAt);
+      (response: any[]) => {
+        this.arrayService = response.sort((a,b) => { 
           return Date.parse(b.createdAt) - Date.parse(a.createdAt); 
-        });
-
-      }
-    )
+      });
+    });
   }
 
 }
