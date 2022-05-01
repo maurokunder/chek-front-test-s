@@ -5,22 +5,26 @@
             <div class="row">
                 <mat-form-field class="{{returnClassSize}}" appearance="fill">
                     <mat-label>Rut</mat-label>
-                    <input formControlName="rut" matInput placeholder="Ej: 16.806.320-2">
+                    <input formControlName="rut" (keyup)="formatCliente($event)" [class.is-invalid]="rutValid && validateRut" matInput placeholder="Ej: 16.806.320-2">
+                    <small *ngIf="rutValid" class="text-danger">Ingrese un Rut valido</small>
                 </mat-form-field>
                 <mat-form-field class="{{returnClassSize}}" appearance="fill">
                     <mat-label>Nombre</mat-label>
-                    <input formControlName="fullName" matInput placeholder="Ej: Juan Andres Gonzalez Gonzalez">
+                    <input formControlName="fullName" (keyup)="formatName($event)" [class.is-invalid]="rutValid" matInput placeholder="Ej: Juan Andres Gonzalez Gonzalez">
+                    <small *ngIf="nameValid" class="text-danger">Debes ingresar un nombre</small>
                 </mat-form-field>
             </div>
 
             <div class="row">
                 <mat-form-field class="{{returnClassSize}}" appearance="fill">
                     <mat-label>Correo</mat-label>
-                    <input formControlName="email" matInput placeholder="Ej: ejemplo@gmail.com">
+                    <input formControlName="email" [class.is-invalid]="emailValid" matInput placeholder="Ej: ejemplo@gmail.com">
+                    <small *ngIf="emailValid" class="text-danger">Ingrese un email valido</small>
                 </mat-form-field>
                 <mat-form-field class="{{returnClassSize}}" appearance="fill">
                     <mat-label>Teléfono</mat-label>
-                    <input formControlName="phone" matInput placeholder="Ej:56934432579">
+                    <input formControlName="phone" [class.is-invalid]="phoneValid" matInput placeholder="Ej:56934432579">
+                    <small *ngIf="phoneValid" class="text-danger">Ingrese un telefono valido</small>
                 </mat-form-field>
             </div>
 
@@ -28,29 +32,35 @@
                 <mat-form-field class="{{returnClassSize}}" appearance="fill">
                     <mat-label>Banco</mat-label>
                     <mat-select formControlName="bankId">
-                       <mat-option *ngFor="let bank of obtainBanks" [value]="bank.name">
+                       <mat-option *ngFor="let bank of obtainBanks" [class.is-invalid]="bankValid" [value]="bank.name">
                         {{bank.name}}
                         </mat-option>
                     </mat-select>
+                    <small *ngIf="bankValid" class="text-danger">Seleccione un Banco</small>
                 </mat-form-field>
                 <mat-form-field class="{{returnClassSize}}" appearance="fill">
                     <mat-label>Tipo de Cuenta</mat-label>
                     <mat-select formControlName="typeAccount">
-                       <mat-option  *ngFor="let type of typeAccounts" [value]="type.value">
+                       <mat-option  *ngFor="let type of typeAccounts" [class.is-invalid]="typeAccountValid" [value]="type.value">
                         {{type.viewValue}}
                         </mat-option>
                     </mat-select>
+                    <small *ngIf="typeAccountValid" class="text-danger">Seleccione un tipo de cuenta</small>
                 </mat-form-field>
             </div>
 
             <div class="row">
                 <mat-form-field class="{{returnClassSize}}" appearance="fill">
                     <mat-label>N° De Cuenta</mat-label>
-                    <input formControlName="accountNumber" matInput placeholder="00-25-20923-03">
+                    <input formControlName="accountNumber" [class.is-invalid]="accountValid" matInput placeholder="00252092303">
+                    <small *ngIf="accountValid" class="text-danger">Solo puede ingresar números</small>
                 </mat-form-field>
             </div>
             <div class="row">
-                <button class="{{returnClassSize}}" (click)="saveForm()" mat-flat-button color="primary">Crear</button>
+                <button class="{{returnClassSize}}"
+                (click)="saveForm()" 
+                [disabled]="newRecipientForm.invalid"
+                mat-flat-button color="primary">Crear</button>
             </div>
         </mat-card>
     </form>

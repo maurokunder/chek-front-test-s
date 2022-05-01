@@ -31,14 +31,24 @@
                 <div class="row">
                     <mat-form-field  appearance="fill">
                         <mat-label>Monto</mat-label>
-                        <input type="number" formControlName="amount" matInput placeholder="Ej: 1000000" min="1" required>
+                        <input 
+                        type="number"
+                        [class.is-invalid]="amountValid"
+                        (keyup)="amountValidation($event)"
+                        formControlName="amount" matInput placeholder="Ej: 1000000" min="1" 
+                        required>
+                        <small *ngIf="amountValid" class="text-danger">monto debe ser mayor que cero</small>
                     </mat-form-field>
                 </div>
             </div>
 
 
             <div class="button_row">
-                <button type="submit" class="desktot-width" (click)="saveForm()" mat-flat-button color="primary">Transferir</button>
+                <button type="submit" 
+                class="desktot-width" 
+                (click)="saveForm()" 
+                [disabled]="newRecipientForm.invalid"
+                mat-flat-button color="primary">Transferir</button>
             </div>
         </mat-card>
     </form>

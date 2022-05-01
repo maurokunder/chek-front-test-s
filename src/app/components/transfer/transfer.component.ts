@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Recipient } from 'src/app/models/cuenta';
 import { RecipientService } from 'src/app/services/recipient.service';
 import { TransferServiceService } from 'src/app/services/transfer-service.service';
-
+import swal from 'sweetalert';
 @Component({
   selector: 'app-transfer',
   templateUrl: './transfer.component.html',
@@ -15,10 +15,10 @@ export class TransferComponent implements OnInit {
   public newRecipient: Recipient;
   public arrayRecipient: any[] = [];
   public booleanEmit: boolean = false;
+  public booleanAmount: boolean = false;
 
 
   constructor(
-    private formBuilder: FormBuilder,
     private recipientService: RecipientService,
     private trasnferService: TransferServiceService,
   ) { }
@@ -28,29 +28,48 @@ export class TransferComponent implements OnInit {
       (res:Recipient[]) => {
         this.arrayRecipient = Object.values(res);
       });
-    this.newRecipientForm = this.formBuilder.group({});
+    this.newRecipientForm = new FormGroup({});
+  }
+
+  public get amountValid() {
+    return this.newRecipientForm.get('amount').invalid && this.newRecipientForm.get('amount').touched;
   }
 
   public getObjetFromAutocomplete($even) {
     if ($even) {
       this.newRecipient = $even;
       this.booleanEmit = true;
-      this.newRecipientForm = this.formBuilder.group({
-          rut: [this.newRecipient.rut],
-          fullName: this.newRecipient.fullName,
-          email: this.newRecipient.email,
-          phone: this.newRecipient.phone,
-          bankId: this.newRecipient.bankId,
-          typeAccount: this.newRecipient.typeAccount,
-          accountNumber: this.newRecipient.accountNumber,
-          amount: ['', Validators.required]
+      this.newRecipientForm = new FormGroup({
+          rut: new FormControl(this.newRecipient.rut),
+          fullName: new FormControl(this.newRecipient.fullName),
+          email: new FormControl(this.newRecipient.email),
+          phone: new FormControl(this.newRecipient.phone),
+          bankId: new FormControl(this.newRecipient.bankId),
+          typeAccount: new FormControl(this.newRecipient.typeAccount),
+          accountNumber: new FormControl(this.newRecipient.accountNumber),
+          amount: new FormControl('', [Validators.required])
         });
       }
     }
 
   public saveForm() {
-    this.trasnferService.addNewtransfer(this.newRecipientForm.value).subscribe();
-    this.newRecipientForm.reset();
+    //console.log('Form data is ', this.newRecipientForm.value);
+    if (this.newRecipientForm.valid && this.newRecipientForm.value['amount'] > 0) {
+      this.trasnferService.addNewtransfer(this.newRecipientForm.value).subscribe();
+      swal('Nueva Transferencia', 'Su transferencia se realizo con exito', 'success');
+      this.newRecipientForm.reset();
+    } else {
+      swal('Nueva Transferencia', 'Su transferencia no tiene un monto valido', 'error');
+    }
+  }
+  
+  public amountValidation ($even) {
+    if ($even.target.value < 1) {
+      $even.target.value = '';
+      this.booleanAmount = false;
+    } else {
+      this.booleanAmount = true;
+    }
   }
 
 }
