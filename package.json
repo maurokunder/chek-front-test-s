@@ -25,6 +25,7 @@
     "dotenv": "^16.0.0",
     "ng2-rut": "^0.3.2",
     "rxjs": "~6.6.0",
+    "sweetalert": "^2.1.2",
     "tslib": "^2.0.0",
     "validar-rut": "^3.0.0",
     "zone.js": "~0.11.3"

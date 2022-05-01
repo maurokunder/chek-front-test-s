@@ -5,8 +5,8 @@ import { MediaObserver, MediaChange} from '@angular/flex-layout';
 import { Bank, TypeAccount } from 'src/app/models/cuenta';
 import { BankService } from 'src/app/services/bank.service';
 import { RecipientService } from 'src/app/services/recipient.service';
-import { validateRUT } from 'validar-rut'
-
+import { validateRUT } from 'validar-rut';
+import swal from 'sweetalert';
 @Component({
   selector: 'app-new-recipient',
   templateUrl: './new-recipient.component.html',
@@ -30,7 +30,6 @@ export class NewRecipientComponent implements OnInit {
   ) { }
 
   public ngOnInit(): void {
-    const patter_rut = RegExp('^0*(\d{1,3}(\.?\d{3})*)\-?([\dkK])$')
     this.newRecipientForm = new FormGroup({
       rut: new FormControl('', [Validators.required]),
       fullName: new FormControl('', [Validators.required]),
@@ -41,10 +40,8 @@ export class NewRecipientComponent implements OnInit {
       accountNumber: new FormControl('', [Validators.required, Validators.pattern("[0-9]+")]),
     });
     this.mediaSub = this.mediaObserver.media$.subscribe((result: MediaChange) => {
-      // console.log(result.mqAlias);
       this.deviceXs = result.mqAlias === 'xs' ? true : false;
       this.returnClassSize = this.deviceXs ? 'mobile-width' : 'desktot-width';
-      console.log(this.returnClassSize);
     });
     this.bankService.getParams().subscribe(
       (result) => {
@@ -92,9 +89,12 @@ export class NewRecipientComponent implements OnInit {
     this.newRecipientForm.value['typeAccount'] = returnValue;
     if (this.newRecipientForm.valid) {
       console.log('Form data is ', this.newRecipientForm.value);
-      //this.recipientService.addNewRecipient(this.newRecipientForm.value).subscribe();
-      alert('Destinatario Ingresado con exito')
+      this.recipientService.addNewRecipient(this.newRecipientForm.value).subscribe();
+      swal('Nuevo Destinatario', this.newRecipientForm.value['fullName']
+        + ' ha sido ingresado con exito', 'success');
       this.newRecipientForm.reset();
+    } else {
+      swal('Nuevo Destinatario', 'Ocurrio un problema al ingresar un nuevo Destinatario', 'error');
     }
   }
 
