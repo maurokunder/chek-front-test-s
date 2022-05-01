@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
     providedIn: 'root'
@@ -11,16 +12,15 @@ export class RecipientService {
     ) { }
 
     public addNewRecipient(bodyService: any) {
-    console.log(bodyService);
     const request = bodyService;
 
     return this.http.post<any>(
-        'http://localhost:3000/api/v1/new_recipient', request, {});
+        `${environment.backendUrl}/new_recipient`, request, {});
     }
 
     public allRecipients() {  
     return this.http.get<any>(
-        'http://localhost:3000/api/v1/all-recipients/', {});
+        `${environment.backendUrl}/all-recipients`, {});
     }
 
 }

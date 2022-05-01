@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BASE_BACKEND } from 'src/environments/environment';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,17 +13,15 @@ export class TransferServiceService {
   ) { }
 
   public addNewtransfer(bodyService: any) {
-    console.log(bodyService);
-    console.log(BASE_BACKEND+'/new_recipient/');
     const request = bodyService;
 
     return this.http.post<any>(
-      'http://localhost:3000/api/v1/transfer', request, {});
+      `${environment.backendUrl}/transfer`, request, {});
   }
 
   public historyTransfer() {  
     return this.http.get<any>(
-      'http://localhost:3000/api/v1/history-transfers/', {});
+      `${environment.backendUrl}/history-transfers/`, {});
   }
 
   public transferById() {

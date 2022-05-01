@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, FormControl } from '@angular/forms';
 import { Recipient } from 'src/app/models/cuenta';
 import { RecipientService } from 'src/app/services/recipient.service';
 import { TransferServiceService } from 'src/app/services/transfer-service.service';
@@ -18,7 +18,6 @@ export class TransferComponent implements OnInit {
 
 
   constructor(
-    private formBuilder: FormBuilder,
     private recipientService: RecipientService,
     private trasnferService: TransferServiceService,
   ) { }
@@ -28,27 +27,28 @@ export class TransferComponent implements OnInit {
       (res:Recipient[]) => {
         this.arrayRecipient = Object.values(res);
       });
-    this.newRecipientForm = this.formBuilder.group({});
+    this.newRecipientForm = new FormGroup({});
   }
 
   public getObjetFromAutocomplete($even) {
     if ($even) {
       this.newRecipient = $even;
       this.booleanEmit = true;
-      this.newRecipientForm = this.formBuilder.group({
-          rut: [this.newRecipient.rut],
-          fullName: this.newRecipient.fullName,
-          email: this.newRecipient.email,
-          phone: this.newRecipient.phone,
-          bankId: this.newRecipient.bankId,
-          typeAccount: this.newRecipient.typeAccount,
-          accountNumber: this.newRecipient.accountNumber,
-          amount: ['', Validators.required]
+      this.newRecipientForm = new FormGroup({
+          rut: new FormControl(this.newRecipient.rut),
+          fullName: new FormControl(this.newRecipient.fullName),
+          email: new FormControl(this.newRecipient.email),
+          phone: new FormControl(this.newRecipient.phone),
+          bankId: new FormControl(this.newRecipient.bankId),
+          typeAccount: new FormControl(this.newRecipient.typeAccount),
+          accountNumber: new FormControl(this.newRecipient.accountNumber),
+          amount: new FormControl()
         });
       }
     }
 
   public saveForm() {
+    console.log('Form data is ', this.newRecipientForm.value);
     this.trasnferService.addNewtransfer(this.newRecipientForm.value).subscribe();
     this.newRecipientForm.reset();
   }

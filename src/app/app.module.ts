@@ -26,7 +26,8 @@ import { TitleComponentComponent } from './components/title-component/title-comp
 import { NewRecipientComponentModule } from './components/new-recipient/new-recipient.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AutocompleteComponentComponent } from './components/autocomplete-component/autocomplete-component.component';
-import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     HttpClientModule,
     MatTableModule,
     MatAutocompleteModule,
-    Ng2Rut
+    Ng2Rut,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
