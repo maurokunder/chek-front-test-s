@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Recipient } from 'src/app/models/cuenta';
 import { RecipientService } from 'src/app/services/recipient.service';
 import { TransferServiceService } from 'src/app/services/transfer-service.service';
-
+import swal from 'sweetalert';
 @Component({
   selector: 'app-transfer',
   templateUrl: './transfer.component.html',
@@ -15,6 +15,7 @@ export class TransferComponent implements OnInit {
   public newRecipient: Recipient;
   public arrayRecipient: any[] = [];
   public booleanEmit: boolean = false;
+  public booleanAmount: boolean = false;
 
 
   constructor(
@@ -30,6 +31,10 @@ export class TransferComponent implements OnInit {
     this.newRecipientForm = new FormGroup({});
   }
 
+  public get amountValid() {
+    return this.newRecipientForm.get('amount').invalid && this.newRecipientForm.get('amount').touched;
+  }
+
   public getObjetFromAutocomplete($even) {
     if ($even) {
       this.newRecipient = $even;
@@ -42,15 +47,29 @@ export class TransferComponent implements OnInit {
           bankId: new FormControl(this.newRecipient.bankId),
           typeAccount: new FormControl(this.newRecipient.typeAccount),
           accountNumber: new FormControl(this.newRecipient.accountNumber),
-          amount: new FormControl()
+          amount: new FormControl('', [Validators.required])
         });
       }
     }
 
   public saveForm() {
-    console.log('Form data is ', this.newRecipientForm.value);
-    this.trasnferService.addNewtransfer(this.newRecipientForm.value).subscribe();
-    this.newRecipientForm.reset();
+    //console.log('Form data is ', this.newRecipientForm.value);
+    if (this.newRecipientForm.valid && this.newRecipientForm.value['amount'] > 0) {
+      this.trasnferService.addNewtransfer(this.newRecipientForm.value).subscribe();
+      swal('Nueva Transferencia', 'Su transferencia se realizo con exito', 'success');
+      this.newRecipientForm.reset();
+    } else {
+      swal('Nueva Transferencia', 'Su transferencia no tiene un monto valido', 'error');
+    }
+  }
+  
+  public amountValidation ($even) {
+    if ($even.target.value < 1) {
+      $even.target.value = '';
+      this.booleanAmount = false;
+    } else {
+      this.booleanAmount = true;
+    }
   }
 
 }
