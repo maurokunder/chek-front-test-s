@@ -8,6 +8,20 @@
                 ></app-autocomplete-component>
             </div>
 
+            <div *ngIf="booleanEmit">
+                <div class="size_title">
+                    <label class="separate"><b>Detalle Cuenta</b></label>
+                </div>
+                <div class="separate">
+                    <label><b>Cupo total: </b></label>
+                    <label> $ {{ amountAvailable }}</label>
+                </div>
+                <div class="separate">
+                    <label><b>Cupo Disponible: </b></label>
+                    <label> $ {{totalAmount}}</label>
+                </div>
+            </div>
+
             <div class="row" *ngIf="booleanEmit">
                 <div class="size_title">
                     <label class="separate"><b>Detalle Destinatario</b></label>
@@ -25,7 +39,7 @@
                     <label> {{ newRecipient.bankId }}</label>
                 </div>
                 <div class="separate">
-                    <label><b>Tipo de Cuenta:</b></label>
+                    <label><b>Tpo de Cuenta:</b></label>
                     <label> {{ newRecipient.typeAccount }}</label>
                 </div>
                 <div class="row">

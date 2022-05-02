@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Recipient } from 'src/app/models/cuenta';
+import { Recipient, Transfer } from 'src/app/models/cuenta';
 import { RecipientService } from 'src/app/services/recipient.service';
 import { TransferServiceService } from 'src/app/services/transfer-service.service';
 import swal from 'sweetalert';
@@ -16,6 +16,8 @@ export class TransferComponent implements OnInit {
   public arrayRecipient: any[] = [];
   public booleanEmit: boolean = false;
   public booleanAmount: boolean = false;
+  public amountAvailable:number = 600000;
+  public  totalAmount = 0;
 
 
   constructor(
@@ -24,6 +26,7 @@ export class TransferComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    
     this.recipientService.allRecipients().subscribe(
       (res:Recipient[]) => {
         this.arrayRecipient = Object.values(res);
@@ -33,6 +36,18 @@ export class TransferComponent implements OnInit {
             swal('Destinatarios', 'Ocurrio un problema al cargar los destinatarios', 'error')
           }
       });
+    this.trasnferService.historyTransfer().subscribe(
+      (res:Transfer[]) => {
+        if (res) {
+          for (const iterator of res) {
+            this.totalAmount = this.totalAmount + iterator.amount;       
+          }
+          this.totalAmount = this.amountAvailable - this.totalAmount;
+        } else {
+          this.totalAmount = this.amountAvailable;
+        }
+      }
+    );
     this.newRecipientForm = new FormGroup({});
   }
 
@@ -58,20 +73,25 @@ export class TransferComponent implements OnInit {
     }
 
   public saveForm() {
+    console.log(this.totalAmount);
     //console.log('Form data is ', this.newRecipientForm.value);
     if (this.newRecipientForm.valid && this.newRecipientForm.value['amount'] > 0) {
-      this.trasnferService.addNewtransfer(this.newRecipientForm.value).subscribe(
-        res => { 
-          if (res) {
-            swal('Nueva Transferencia', 'Su transferencia se realizo con exito', 'success');
-          }
-      },
-        err => { 
-          if (err){
-            swal('Nueva Transferencia', 'Ocurrio un problema con su transferencia', 'error')
-          }
-      });
-      this.newRecipientForm.reset();
+      if (this.newRecipientForm.value['amount'] > this.totalAmount){
+        swal('Nueva Transferencia', 'El monto a transferir es mayor al cupo disponible', 'error')
+      } else {        
+        this.trasnferService.addNewtransfer(this.newRecipientForm.value).subscribe(
+          res => { 
+            if (res) {
+                swal('Nueva Transferencia', 'Su transferencia se realizo con exito', 'success');
+            }
+        },
+          err => { 
+            if (err){
+              swal('Nueva Transferencia', 'Ocurrio un problema con su transferencia', 'error')
+            }
+        });
+        this.newRecipientForm.reset();
+      }
     } else {
       swal('Nueva Transferencia', 'Su transferencia no tiene un monto valido', 'error');
     }
