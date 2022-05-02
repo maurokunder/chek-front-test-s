@@ -46,8 +46,11 @@ export class NewRecipientComponent implements OnInit {
     this.bankService.getParams().subscribe(
       (result) => {
         this.obtainBanks = result.banks;
+      }, err => { 
+        if (err){
+          swal('Bancos', 'Ocurrio un error al cargar los bancos', 'error')
       }
-    );
+    });
 
     this.typeAccounts = [
       { value: 'account-0', viewValue: 'Cuenta Corriente' },
@@ -89,9 +92,19 @@ export class NewRecipientComponent implements OnInit {
     this.newRecipientForm.value['typeAccount'] = returnValue;
     if (this.newRecipientForm.valid) {
       console.log('Form data is ', this.newRecipientForm.value);
-      this.recipientService.addNewRecipient(this.newRecipientForm.value).subscribe();
-      swal('Nuevo Destinatario', this.newRecipientForm.value['fullName']
-        + ' ha sido ingresado con exito', 'success');
+      this.recipientService.addNewRecipient(this.newRecipientForm.value).subscribe(
+        res => { 
+          if (res) {
+            swal('Nuevo Destinatario', this.newRecipientForm.value['fullName']
+                + ' ha sido ingresado con exito', 'success')
+          }
+      },
+        err => { 
+          if (err){
+            swal('Nuevo Destinatario', 'El número de cuenta ya se encuentra registrado', 'error')
+          }
+      });
+      
       this.newRecipientForm.reset();
     } else {
       swal('Nuevo Destinatario', 'Ocurrio un problema al ingresar un nuevo Destinatario', 'error');
