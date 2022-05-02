@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TransferServiceService } from 'src/app/services/transfer-service.service';
+import swal from 'sweetalert';
 
 @Component({
   selector: 'app-transfer-history',
@@ -21,6 +22,11 @@ export class TransferHistoryComponent implements OnInit {
         this.arrayService = response.sort((a,b) => { 
           return Date.parse(b.createdAt) - Date.parse(a.createdAt); 
       });
+    },
+    err => { 
+      if (err){
+        swal('Historial', 'Ocurrio un problema al cargar el historial de transferencias', 'error')
+      }
     });
   }
 

@@ -27,6 +27,11 @@ export class TransferComponent implements OnInit {
     this.recipientService.allRecipients().subscribe(
       (res:Recipient[]) => {
         this.arrayRecipient = Object.values(res);
+      },
+        err => { 
+          if (err){
+            swal('Destinatarios', 'Ocurrio un problema al cargar los destinatarios', 'error')
+          }
       });
     this.newRecipientForm = new FormGroup({});
   }
@@ -55,8 +60,17 @@ export class TransferComponent implements OnInit {
   public saveForm() {
     //console.log('Form data is ', this.newRecipientForm.value);
     if (this.newRecipientForm.valid && this.newRecipientForm.value['amount'] > 0) {
-      this.trasnferService.addNewtransfer(this.newRecipientForm.value).subscribe();
-      swal('Nueva Transferencia', 'Su transferencia se realizo con exito', 'success');
+      this.trasnferService.addNewtransfer(this.newRecipientForm.value).subscribe(
+        res => { 
+          if (res) {
+            swal('Nueva Transferencia', 'Su transferencia se realizo con exito', 'success');
+          }
+      },
+        err => { 
+          if (err){
+            swal('Nueva Transferencia', 'Ocurrio un problema con su transferencia', 'error')
+          }
+      });
       this.newRecipientForm.reset();
     } else {
       swal('Nueva Transferencia', 'Su transferencia no tiene un monto valido', 'error');
