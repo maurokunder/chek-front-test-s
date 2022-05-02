@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
@@ -22,9 +22,5 @@ export class TransferServiceService {
   public historyTransfer() {  
     return this.http.get<any>(
       `${environment.backendUrl}/history-transfers/`, {});
-  }
-
-  public transferById() {
-
   }
 }
