@@ -13,6 +13,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatTableModule } from '@angular/material/table';
 import { Ng2Rut } from 'ng2-rut';
+import { ChartsModule } from 'ng2-charts';
 
 
 import { AppComponent } from './app.component';
@@ -28,6 +29,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AutocompleteComponentComponent } from './components/autocomplete-component/autocomplete-component.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDialogModule } from '@angular/material/dialog';
+import { GenericChartComponent } from './components/generic-chart/generic-chart.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     TransferComponent,
     TransferHistoryComponent,
     TitleComponentComponent,
-    AutocompleteComponentComponent
+    AutocompleteComponentComponent,
+    GenericChartComponent
   ],
   imports: [
     BrowserModule,
@@ -59,6 +62,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatAutocompleteModule,
     Ng2Rut,
     MatDialogModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

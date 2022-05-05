@@ -1,6 +1,10 @@
 <app-title-component [enterTitle]="enterTitle"></app-title-component>
 <div class="container">
+        
         <mat-card class="size-card">
+            <div class="row">
+                <app-generic-chart [startDate]="startDateToChart" [endDate]="endDateToChart" [arrayPayments]="dataForChart"></app-generic-chart>              
+            </div>
             <table mat-table [dataSource]="arrayService" class="mat-elevation-z8">
 
             <ng-container matColumnDef="Nombre Destinatario">
