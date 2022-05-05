@@ -44,7 +44,6 @@ export class TransferHistoryComponent implements OnInit {
             accountNumber: res.accountNumber,
             amount: this.formatCurrency(res.amount)
           }
-          console.log(value);
           return value;
         });
     },
