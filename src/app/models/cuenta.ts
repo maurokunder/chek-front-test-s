@@ -27,5 +27,6 @@ export interface Transfer {
     typeAccount: string;
     accountNumber: string;
     amount?: number;
+    createdAt: string;
 }
 
