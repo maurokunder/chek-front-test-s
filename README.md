@@ -41,12 +41,14 @@ A continuación se dan a conocer las tecnologias utilizadas en el proyecto front
 <img width="600" alt="Captura de Pantalla 2022-05-03 a la(s) 00 06 05" src="https://user-images.githubusercontent.com/60144263/166340352-111219c3-8d92-4128-af0b-79092959d54c.png">
 
 #### Historial de Transferencias
-- Se utilizo el servicio creado en el backend para llenar la tabla de la vista
+- Se utilizo el servicio creado en el backend para llenar la tabla de la vista, adicional se agrego un grafico para que el usuario pueda ver cuanta dinero ha transferido en un mes, el algoritmo realiza un acumulativo por mes y lo refleja en la parte grafica del componente, esta funcionalidad esta disponible para mobile y desktop.
 
 
 <img width="600" alt="Captura de Pantalla 2022-05-03 a la(s) 00 14 33" src="https://user-images.githubusercontent.com/60144263/166341035-65175761-a262-4207-bc0f-07bc8cf0a58d.png">
+<img width="600" alt="Captura de Pantalla 2022-05-05 a la(s) 15 25 30" src="https://user-images.githubusercontent.com/60144263/166945499-0cf7a9ef-52a3-4519-ba0d-876b16826c79.png">
+<img width="400" alt="Captura de Pantalla 2022-05-05 a la(s) 15 25 46" src="https://user-images.githubusercontent.com/60144263/166945570-9c375b07-81ed-4905-9073-80a0c37e2ef1.png">
 
-<img width="600" alt="Captura de Pantalla 2022-05-03 a la(s) 00 19 42" src="https://user-images.githubusercontent.com/60144263/166341528-a1a97478-d7fc-4ea0-8dc6-7f6e467dafab.png">
+
 
 ## Tecnolgias utilizadas Backend
 A continuación se dan a conocer las tecnologias utilizadas en el proyecto BackEnd:
