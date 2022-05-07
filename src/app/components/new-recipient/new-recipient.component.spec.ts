@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { BankService } from 'src/app/services/bank.service';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { NewRecipientComponent } from './new-recipient.component';
 
@@ -8,7 +11,12 @@ describe('NewRecipientComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NewRecipientComponent ]
+      declarations: [ NewRecipientComponent ],
+      imports: [HttpClientTestingModule],
+      providers: [
+        { provide: HttpClient },
+        { provide: BankService},
+      ],
     })
     .compileComponents();
   });

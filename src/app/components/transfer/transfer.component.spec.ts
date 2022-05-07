@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { TransferComponent } from './transfer.component';
@@ -8,7 +10,11 @@ describe('TransferComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ TransferComponent ]
+      declarations: [ TransferComponent ],
+      imports: [HttpClientTestingModule],
+      providers: [
+        { provide: HttpClient },
+      ],
     })
     .compileComponents();
   });
